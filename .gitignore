@@ -1,0 +1,6 @@
+# What follows affect this top-level directory and all subdirectories.
+
+# hidden files in MacOS
+.DS_Store
+
+*.o
