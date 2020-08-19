@@ -53,12 +53,13 @@ The following helper modules provide data structures:
 
 ### Testing plan
 
-0. Test the program with incorrect command-line arguments to ensure that its command-line parsing, and validation of those parameters, works correctly.
+1. Unit testing for the creator
 
-1. Test the program to create a sudoku puzzle. Check that the puzzle has a unique solution.
+2. Unit testing for the solver
 
-2. Test the program to solve sudoku puzzles inputted via stdin.
-* a. Test with a grid inputted via stdin which has invalid syntax.
-* b. Test with a grid inputted via stdin which is not a valid sudoku grid.
-* c. Test with a valid sudoku grid which has a unique solution.
-* d. Test with a valid sudoku grid which does not have a unique solution.
+3. Fuzzy testing for the sudoku program
+* use the creator to generate n puzzles, where n is a commandline argument
+* for each puzzle
+    * check that the puzzle has a unique solution
+    * use the solver to solve the puzzle
+    * check that the solution is valid (follows sudoku rules and doesn’t change already filled cells in the grids)
