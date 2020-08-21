@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "grid.h"
+#include "../common/grid.h"
 #include "../create/create.h"
 #include "../solve/solve.h"
 

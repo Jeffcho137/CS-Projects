@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../grid/grid.h"
+#include "../common/grid.h"
 
 static bool solve_board(grid_t* grid, int pos);
 

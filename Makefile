@@ -3,33 +3,25 @@
 # teamJST, CS 50
 # August 2020
 
-PROG = sudoku
-OBJS = sudoku.o create.o solve.o grid.o
-LIBS =
+############## default: make all libs and programs ##########
+all: 
+	make -C common
+	make -C solve
+	make -C create
+	make -C sudoku
 
-# uncomment the following to turn on verbose memory logging
-#TESTING=-DMEMTEST
+############## test sudoku ##########
+test: all
+	make -C sudoku test
 
-CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I../lib
-CC = gcc
-MAKE = make
+############## valgrind ##########
+valgrind: all
+	make -C sudoku valgrind
 
-$(PROG): $(OBJS)
-	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
-
-sudoku.o: create.h solve.h grid.h
-create.o: grid.h
-solve.o: grid.h
-
-.PHONY: test valgrind clean
-
-test: $(PROG)
-	bash testing.sh &> testing.out
-
-valgrind: $(PROG)
-	valgrind ./$(PROG)
-
+############## clean  ##########
 clean:
-	rm -rf *.dSYM  # MacOS debugger info
-	rm -f *~ *.o
-	rm -f $(PROG)
+	rm -f *~
+	make -C common clean
+	make -C solve clean
+	make -C create clean
+	make -C sudoku clean

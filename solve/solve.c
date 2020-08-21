@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <grid.h>
+#include "../common/grid.h"
 //#include <time.h>
 
 int check_unique(grid_t *grid, int row, int col, int num)
