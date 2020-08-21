@@ -36,7 +36,7 @@ grid_t* grid_new();
  *   valid pointer to grid, integers representing the row and column.
  * We return:
  *   the number at the given row and column if valid row and col;
- *   -1 if grid is NULL or row or col is not an integer from 0 to 9.
+ *   -1 if grid is NULL or row or col is not an integer from 0 to 8.
  * Notes:
  *   the grid is unchanged by this operation.
  */
@@ -48,7 +48,9 @@ int grid_get(grid_t* grid, int row, int col);
  * Caller provides:
  *   valid pointer to grid, integers representing the row and column.
  * We return:
- *   false if grid is NULL or row or col is not an integer from 0 to 9,
+ *   false if grid is NULL
+ *   false if row or col is not an integer from 0 to 8,
+ *   false if num is not an integer from 0 to 9,
  *   true iff new number was set.  
  */
 bool grid_set(grid_t* grid, int row, int col, int num);
@@ -80,6 +82,21 @@ void grid_print(grid_t* grid, FILE *fp);
  */
 void grid_delete(grid_t* grid);
 
+/**************** valid_num ****************/
+/* Determines if a number in the grid is valid.
+ *
+ * Caller provides:
+ *   valid pointer to grid, integers representing the row and column.
+ * We return:
+ *   false, if grid==NULL.
+ *   false, if row or col is not an integer from 0 to 8.
+ *   false, if the number at the given row and column is found more
+ *   than once in the its row, column, or 3x3 square region.
+ *   true, if the number at the given row and column appears at most
+ *   once in its row, column, and 3x3 square region.
+ */
+bool valid_num(grid_t* grid, int row, int col);
+
 /**************** valid_grid ****************/
 /* Determines if a grid is a valid sudoku grid.
  *
@@ -90,7 +107,11 @@ void grid_delete(grid_t* grid);
  *   otherwise, check that each number from 1 to 9 appears at most
  *   once in every row, column, and 3x3 square region.
  * We return:
- *   pointer to the new index; return NULL if error.
+ *   false, if grid==NULL.
+ *   false, if any number appears more than once in its row, column,
+ *   or 3x3 square region.
+ *   true, if each number from 1 to 9 appears at most once in every
+ *   row, column, and 3x3 square region.
  */
 bool valid_grid(grid_t* grid);
 

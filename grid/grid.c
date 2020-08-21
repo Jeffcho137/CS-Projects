@@ -25,14 +25,14 @@ typedef int** grid_t;   // 2D array representing 9 rows of 9 integers
 grid_t *
 grid_new()
 {
-  grid_t* grid = count_malloc(9 * sizeof(int *));
+  grid_t* grid = malloc(9 * sizeof(int *));
   if (grid == NULL) {
     return NULL;              // error allocating grid
   }
 
   // initialize the contents of each row
   for (int i = 0; i < 9; i++) {
-    grid[i] = count_malloc(9 * sizeof(int));
+    grid[i] = malloc(9 * sizeof(int));
     if (grid[i] == NULL) {
         return NULL;          // error allocating grid
     }
@@ -53,7 +53,7 @@ grid_get(grid_t* grid, int row, int col)
 {
   if (grid == NULL) { // bad grid
     return -1;
-  } else if (row < 0 || col < 0 || row > 9 || col > 9) { // bad row/col
+  } else if (row < 0 || col < 0 || row > 8 || col > 8) { // bad row/col
     return -1;
   } else {
     return grid[row][col];
@@ -67,7 +67,7 @@ grid_set(grid_t* grid, int row, int col, int num)
 {
   if (grid == NULL) { // bad grid
     return false;
-  } else if (row < 0 || col < 0 || row > 9 || col > 9) { // bad row/col
+  } else if (row < 0 || col < 0 || row > 8 || col > 8) { // bad row/col
     return false;
   } else if (num < 0 || num > 9) { // bad num
     return false;
@@ -109,14 +109,48 @@ grid_delete(grid_t* grid)
 {
   if (grid != NULL) {
     for (int i = 0; i < 9; i++) {
-      count_free(grid[i]);
+      free(grid[i]);
     }
-    count_free(grid);
+    free(grid);
   }
 
 #ifdef MEMTEST
   count_report(stdout, "End of grid_delete");
 #endif
+}
+
+/**************** valid_num() ****************/
+/* see grid.h for description */
+bool
+valid_num(grid_t* grid, int row, int col)
+{
+  if (grid == NULL) { // bad grid
+    return false;
+  } else if (row < 0 || col < 0 || row > 8 || col > 8) { // bad row/col
+    return false;
+  }
+
+  int num = grid[row][col];
+  for (int i = 0; i < 9; i++) {
+    // check its row
+    if (i != col && grid[row][i] == num) {
+      return false;
+    }
+    // check its column
+    if (i != row && grid[i][col] == num) {
+      return false;
+    }
+  }
+  // check its 3x3 square
+  for (int i = row - (row % 3); i < i + 3; i++) {
+    for (int j = col - (col % 3); j < j + 3; j++) {
+      if (!(i == row && j == col) && grid[i][j] == num) {
+        return false;
+      }
+    }
+  }
+
+  return true;
 }
 
 /**************** valid_grid() ****************/

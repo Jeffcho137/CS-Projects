@@ -2,13 +2,13 @@
  * create.c - see create.h for more information
  *
  * team jst, CS50 summer 2020
- * /
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "grid.h"
-#include "solve.h"
+#include "../grid/grid.h"
+// #include "../solve/solve.h"
 
 /**************** local functions ****************/
 static void array_shuffle(int nums[], int length);
@@ -42,13 +42,13 @@ create_puzzle(char *difficulty)
       }
 
       // set number at the current row/col as the number at current pos of nums
-      grid_set(i, x, nums[pos]);
+      grid_set(grid, i, x, nums[pos]);
       pos++;
 
       // check if grid has non-zero solutions, if zero solutions, then try another number
       while (check_unique(grid, 0, 0, 0) != 0) {
-        grid_set(i, x, nums[pos]);
-	pos++;
+        grid_set(grid, i, x, nums[pos]);
+	      pos++;
       } 
 
       // set number used to 0 so that it is not used again
@@ -70,7 +70,7 @@ create_puzzle(char *difficulty)
 /**************** array_shuffle() ****************/
 /* takes an int array and int length and shuffles the array */
 static void
-array_shuffle(int nums[], int length);
+array_shuffle(int nums[], int length)
 {
   // swap each array element with a random element
   for (int i = 0; i < length; i++) {
