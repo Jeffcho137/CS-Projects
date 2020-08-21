@@ -74,7 +74,7 @@ array_shuffle(int nums[], int length);
 {
   // swap each array element with a random element
   for (int i = 0; i < length; i++) {
-    int randomPos = (rand() % 9) + 1;
+    int randomPos = rand() % 9;
     
     int temp = nums[i];
     nums[i] = nums[randomPos];
