@@ -74,7 +74,7 @@ array_shuffle(int nums[], int length);
 {
   // swap each array element with a random element
   for (int i = 0; i < length; i++) {
-    int randomPos = (rand() % 9) + 1;
+    int randomPos = rand() % 9;
     
     int temp = nums[i];
     nums[i] = nums[randomPos];
@@ -103,8 +103,8 @@ delete_numbers(grid_t *grid, char *difficulty)
 
   // randomly select numbers to delete until numbers deleted equals deletions
   while (deletions > 0) {
-    int randomRow = (rand() % 9) + 1;
-    int randomCol = (rand() % 9) + 1;
+    int randomRow = rand() % 9;
+    int randomCol = rand() % 9;
 
     int num = grid_get(grid, randomRow, randomCol);
     if (num != 0) {
