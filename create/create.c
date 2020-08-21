@@ -103,8 +103,8 @@ delete_numbers(grid_t *grid, char *difficulty)
 
   // randomly select numbers to delete until numbers deleted equals deletions
   while (deletions > 0) {
-    int randomRow = (rand() % 9) + 1;
-    int randomCol = (rand() % 9) + 1;
+    int randomRow = rand() % 9;
+    int randomCol = rand() % 9;
 
     int num = grid_get(grid, randomRow, randomCol);
     if (num != 0) {
