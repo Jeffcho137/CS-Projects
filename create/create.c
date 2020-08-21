@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../grid/grid.h"
+#include "../common/grid.h"
 // #include "../solve/solve.h"
 
 /**************** local functions ****************/
