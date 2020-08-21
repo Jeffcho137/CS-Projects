@@ -7,11 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "grid.h"
+#include "../grid/grid.h"
 
-static bool solve_board(grid_t grid, pos);
+static bool solve_board(grid_t* grid, int pos);
 
-int check_unique(grid_t grid, row, col, num);
+int check_unique(grid_t* grid, int row, int col, int num);
 
-int solver(grid_t, grid);
+int solver(grid_t* grid);
 
