@@ -8,16 +8,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../common/grid.h"
-// #include "../solve/solve.h"
+#include "../solve/solve.h"
 
 /**************** local functions ****************/
 static void array_shuffle(int nums[], int length);
-static void delete_numbers(grid_t *grid, char* difficulty);
+static void delete_numbers(grid_t *grid);
 
 /**************** create_puzzle() ****************/
 /* see create.h for more information */
 grid_t * 
-create_puzzle(char *difficulty)
+create_puzzle()
 {
   // new grid to be returned
   grid_t *grid = grid_new();
@@ -56,12 +56,7 @@ create_puzzle(char *difficulty)
     }
   }
 
-  if (difficulty == NULL) {
-    delete_numbers(grid, "medium");
-  
-  } else {
-    delete_numbers(grid, difficulty);
-  }
+  delete_numbers(grid);
 
   return grid;
 }
@@ -85,21 +80,11 @@ array_shuffle(int nums[], int length)
 
 
 /**************** delete_numbers() ****************/
-/* depending on user-selected difficulty, delete numbers at random places (default difficulty is medium) */
+/* deletes 45 numbers from grid */
 static void
-delete_numbers(grid_t *grid, char *difficulty)
+delete_numbers(grid_t *grid)
 {
-  int deletions;
-
-  if (strcmp(difficulty, "easy") == 0) {
-    deletions = 30;
- 
-  } else if (strcmp(difficulty, "hard") == 0) {
-    deletions = 60;
- 
-  } else {
-    deletions = 40;
-  }
+  int deletions = 45;
 
   // randomly select numbers to delete until numbers deleted equals deletions
   while (deletions > 0) {
@@ -121,4 +106,3 @@ delete_numbers(grid_t *grid, char *difficulty)
     }
   }
 }
-
