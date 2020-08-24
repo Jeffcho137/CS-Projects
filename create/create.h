@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-
+#include "../common/grid.h"
 
 /**************** create_puzzle() ****************/
 /*
@@ -19,7 +19,7 @@
  *   string difficulty (can be NULL)
  *
  * Returns:
- *   grid initialized as a valid sudoku puzzle with numbers removed as specified by difficulty (medium is default if none specified)
+ *   grid initialized as a valid sudoku puzzle with 45 numbers removed
  *   NULL if error creating grid
  *   caller is responsible for freeing grid
  */   

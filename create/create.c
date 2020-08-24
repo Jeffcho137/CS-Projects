@@ -2,22 +2,22 @@
  * create.c - see create.h for more information
  *
  * team jst, CS50 summer 2020
- * /
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "grid.h"
-#include "solve.h"
+#include "../common/grid.h"
+#include "../solve/solve.h"
 
 /**************** local functions ****************/
 static void array_shuffle(int nums[], int length);
-static void delete_numbers(grid_t *grid, char* difficulty);
+static void delete_numbers(grid_t *grid);
 
 /**************** create_puzzle() ****************/
 /* see create.h for more information */
 grid_t * 
-create_puzzle(char *difficulty)
+create_puzzle()
 {
   // new grid to be returned
   grid_t *grid = grid_new();
@@ -42,13 +42,13 @@ create_puzzle(char *difficulty)
       }
 
       // set number at the current row/col as the number at current pos of nums
-      grid_set(i, x, nums[pos]);
+      grid_set(grid, i, x, nums[pos]);
       pos++;
 
       // check if grid has non-zero solutions, if zero solutions, then try another number
       while (check_unique(grid, 0, 0, 0) != 0) {
-        grid_set(i, x, nums[pos]);
-	pos++;
+        grid_set(grid, i, x, nums[pos]);
+	      pos++;
       } 
 
       // set number used to 0 so that it is not used again
@@ -56,12 +56,7 @@ create_puzzle(char *difficulty)
     }
   }
 
-  if (difficulty == NULL) {
-    delete_numbers(grid, "medium");
-  
-  } else {
-    delete_numbers(grid, difficulty);
-  }
+  delete_numbers(grid);
 
   return grid;
 }
@@ -70,7 +65,7 @@ create_puzzle(char *difficulty)
 /**************** array_shuffle() ****************/
 /* takes an int array and int length and shuffles the array */
 static void
-array_shuffle(int nums[], int length);
+array_shuffle(int nums[], int length)
 {
   // swap each array element with a random element
   for (int i = 0; i < length; i++) {
@@ -85,21 +80,11 @@ array_shuffle(int nums[], int length);
 
 
 /**************** delete_numbers() ****************/
-/* depending on user-selected difficulty, delete numbers at random places (default difficulty is medium) */
+/* deletes 45 numbers from grid */
 static void
-delete_numbers(grid_t *grid, char *difficulty)
+delete_numbers(grid_t *grid)
 {
-  int deletions;
-
-  if (strcmp(difficulty, "easy") == 0) {
-    deletions = 30;
- 
-  } else if (strcmp(difficulty, "hard") == 0) {
-    deletions = 60;
- 
-  } else {
-    deletions = 40;
-  }
+  int deletions = 45;
 
   // randomly select numbers to delete until numbers deleted equals deletions
   while (deletions > 0) {
@@ -121,4 +106,3 @@ delete_numbers(grid_t *grid, char *difficulty)
     }
   }
 }
-

@@ -14,9 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "grid.h"
-// #include "create.h" // TODO
-// #include "solve.h" // TODO
+#include "../common/grid.h"
+#include "../create/create.h"
+#include "../solve/solve.h"
 
 int main(const int argc, char *argv[])
 {
@@ -37,7 +37,7 @@ int main(const int argc, char *argv[])
 
 	// create sudoku puzzle
     if (command == "create") {
-        grid_t* grid = create_puzzle(); // TODO
+        grid_t* grid = create_puzzle("easy");
         grid_print(grid, stdout);
         grid_delete(grid);
     }
@@ -45,7 +45,7 @@ int main(const int argc, char *argv[])
     // get sudoku puzzle and solve it
     if (command == "solve") {
         grid_t* grid = load_grid(stdin);
-        solve_puzzle(grid); // TODO
+        solver(grid);
         grid_print(grid, stdout);
         grid_delete(grid);
     }

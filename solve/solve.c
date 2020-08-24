@@ -7,9 +7,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <grid.h>
+#include "../common/grid.h"
 //#include <time.h>
 
+/********** check_unique() **********/
+/* see solve.h for more info */
 int check_unique(grid_t *grid, int row, int col, int num)
 {
 
@@ -37,66 +39,26 @@ int check_unique(grid_t *grid, int row, int col, int num)
 
 }
 
-//static bool check_num(grid_t *grid, int row, int col, int value)
-//{
-//	if (check_row(grid, row, col, value))
-//		return true;
-//	if (check_col(grid, row, col, value))
-//		return true;
-//	if (check_grid(grid, row, col, value))
-//		return true;
-//	return false;	
-//}
-
-//static bool check_row(grid_t *grid, int row, int col, int value)
-//{
-//	for (int i = 0; i < 9; i++)
-//	{
-//		if (i == col)
-//			continue;
-//		if (b->grid[row][i] == value)
-//		{
-//			return true;
-//		}
-//	}
-//	return false;
-//}
-
-/*static bool check_grid(grid_t *grid, int row, int col, int value)
- *{
- *	// assign the beginning row and column positions
- *	int beg_row = (int)(row/3) * 3; 
- *	int beg_col = (int)(col/3) * 3;
- *
- *	for (int i = beg_row; i < beg_row + 3; i++)
- *	{
- *		for (int j = beg_col; j < beg_col + 3; j++)
- *		{
- *			if (j == col && i == row)
- *			{
- *				continue;
- *			}
- *
- *			if (grid_get(grid, i, j) == value)
- *				return true;
- *		}
- *	}
- *
- *	return false;
- *
- *}
-*/
-
+/********** find_row **********/
+/*
+ * finds the row given location on grid (0 - 80)
+ */
 static int find_row(grid_t *grid, int loc)
 {
 	return (int)(loc / 9);
 }
 
+/********** find_col **********/
+/*
+ * finds the column given location on grid (0 - 80)
+ */
 static int find_col(grid_t *grid, int loc)
 {
 	return (int)(loc%9);
 }
 
+/********** solve_board() **********/
+/* see solve.h for more info */
 static bool solve_board(grid_t *grid, int start_pos)
 {
 	int zero = 0;
@@ -143,6 +105,8 @@ static bool solve_board(grid_t *grid, int start_pos)
 	return true;
 }
 
+/********** solver() **********/
+/* see solve.h for more info */
 int solver(grid_t *grid)
 {
 	int sol = check_unique(grid, 0, 0, 0);
