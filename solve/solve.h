@@ -27,7 +27,7 @@ static bool solve_board(grid_t* grid, int pos);
 /*
  * check_unique() -  returns the number of solutions for the grid
  *
- * Input: grid, the starting row (0), the starting column (0), the variable to count number of solutions 
+ * Input: grid, the starting row (0), the starting column (0), the starting value of the variable to count number of solutions 
  *
  * Output: 0, 1, or more. Depends on how many solutions. 0 means no solutions, 1 means unique solution, more indicates more than one solution.
  *
