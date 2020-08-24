@@ -1,7 +1,7 @@
 /*
  * solve.c - implementation for header solve.h
  *
- *
+ * Team JST CS50 Summer 2020
  */ 
 
 #include <stdio.h>
@@ -12,8 +12,7 @@
 
 int check_unique(grid_t *grid, int row, int col, int num)
 {
-// i = row
-// j = col
+
 	if (col == 9)
 	{
 		col = 0;
@@ -29,77 +28,64 @@ int check_unique(grid_t *grid, int row, int col, int num)
 		if(!valid_num(grid, row, col, i))
 		{
 			grid_set(grid, row, col, i);
-			//b->grid[row][col] = i;
 			num = check_unique(grid, row, col + 1, num);
 		}
 	}
 
 	grid_set(grid, row, col, 0);
-	//b->grid[row][col] = 0;
 	return num;
 
 }
 
-static bool check_num(grid_t *grid, int row, int col, int value)
-{
-	if (check_row(grid, row, col, value))
-		return true;
-	if (check_col(grid, row, col, value))
-		return true;
-	if (check_grid(grid, row, col, value))
-		return true;
-	return false;	
-}
+//static bool check_num(grid_t *grid, int row, int col, int value)
+//{
+//	if (check_row(grid, row, col, value))
+//		return true;
+//	if (check_col(grid, row, col, value))
+//		return true;
+//	if (check_grid(grid, row, col, value))
+//		return true;
+//	return false;	
+//}
 
-static bool check_row(grid_t *grid, int row, int col, int value)
-{
-	for (int i = 0; i < 9; i++)
-	{
-		if (i == col)
-			continue;
-		if (b->grid[row][i] == value)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-//static bool check_col(grid_t *grid, int row, int col, int value)
+//static bool check_row(grid_t *grid, int row, int col, int value)
 //{
 //	for (int i = 0; i < 9; i++)
 //	{
-//		if (i == row)
+//		if (i == col)
 //			continue;
-//		if (gri == value)
+//		if (b->grid[row][i] == value)
+//		{
 //			return true;
+//		}
 //	}
 //	return false;
-//}/
+//}
 
-static bool check_grid(grid_t *grid, int row, int col, int value)
-{
-	// assign the beginning row and column positions
-	int beg_row = (int)(row/3) * 3; 
-	int beg_col = (int)(col/3) * 3;
-
-	for (int i = beg_row; i < beg_row + 3; i++)
-	{
-		for (int j = beg_col; j < beg_col + 3; j++)
-		{
-			if (j == col && i == row)
-			{
-				continue;
-			}
-
-			if (grid_get(grid, i, j) == value)
-				return true;
-		}
-	}
-
-	return false;
-
-}
+/*static bool check_grid(grid_t *grid, int row, int col, int value)
+ *{
+ *	// assign the beginning row and column positions
+ *	int beg_row = (int)(row/3) * 3; 
+ *	int beg_col = (int)(col/3) * 3;
+ *
+ *	for (int i = beg_row; i < beg_row + 3; i++)
+ *	{
+ *		for (int j = beg_col; j < beg_col + 3; j++)
+ *		{
+ *			if (j == col && i == row)
+ *			{
+ *				continue;
+ *			}
+ *
+ *			if (grid_get(grid, i, j) == value)
+ *				return true;
+ *		}
+ *	}
+ *
+ *	return false;
+ *
+ *}
+*/
 
 static int find_row(grid_t *grid, int loc)
 {
@@ -140,7 +126,6 @@ static bool solve_board(grid_t *grid, int start_pos)
 
 	int value = 1;
 	
-	//b->grid[r][c] = value;
 
 	while (check_num(grid, row, col, value) || !solve_board(grid, start_pos + 1))
 	{
