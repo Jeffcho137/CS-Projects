@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "../common/grid.h"
 #include "solve.h"
-#include "create.h"
+//#include "create.h"
 
 /*
  * test grid:
@@ -28,6 +28,7 @@
  */
 
 int main(){
+	
 	grid_t *grid = grid_new();
 	grid_set(grid, 0, 3, 3);
 	grid_set(grid, 0, 4, 9);
@@ -62,7 +63,7 @@ int main(){
 	grid_set(grid, 8, 7, 6);
 	grid_set(grid, 8, 8, 1);
 
-	grid_print(grid);
+	grid_print(grid, "output.txt");
 
 	printf("..... testing solve_board .....");
 	if (solve_board(grid, 0))
@@ -75,7 +76,7 @@ int main(){
 		printf("Grid not solved");
 	}
 
-	grid_print(grid);
+	grid_print(grid, "output.txt");
 
 	printf("..... testing solver .....");
 
@@ -90,14 +91,14 @@ int main(){
 		printf("Not unique grid");
 	}
 
-	grid_print(grid);	
+	grid_print(grid, "output.txt");	
 
 	printf("..... testing check_unique .....");
 	int solutions = check_unique(grid, 0, 0, 0);
 
-	fprintf("This grid has %d solutions", solutions);
+	printf("This grid has %d solutions", solutions);
 
-	grid_print(grid);
+	grid_print(grid, "output.txt");
 	grid_delete(grid);
 
 }

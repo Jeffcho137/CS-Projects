@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+//#include "grid.h"
 #include "../common/grid.h"
 //#include <time.h>
 
@@ -27,7 +28,7 @@ int check_unique(grid_t *grid, int row, int col, int num)
 	
 	for (int i = 1; i <= 9 && num < 2; ++i)
 	{
-		if(!valid_num(grid, row, col, i))
+		if(!valid_num(grid, row, col))
 		{
 			grid_set(grid, row, col, i);
 			num = check_unique(grid, row, col + 1, num);
@@ -74,7 +75,7 @@ static bool solve_board(grid_t *grid, int start_pos)
 	}
 
 	//Base case
-	if (!zeros)
+	if (!zero)
 		return true;
 
 	int row = find_row(grid, start_pos);
@@ -89,7 +90,7 @@ static bool solve_board(grid_t *grid, int start_pos)
 	int value = 1;
 	
 
-	while (check_num(grid, row, col, value) || !solve_board(grid, start_pos + 1))
+	while (valid_num(grid, row, col) || !solve_board(grid, start_pos + 1))
 	{
 		grid_set(grid, row, col, ++value); 
 		//b->grid[row][col] = ++value;
@@ -111,5 +112,5 @@ int solver(grid_t *grid)
 {
 	int sol = check_unique(grid, 0, 0, 0);
 	solve_board(grid, 0);
-	return int sol;
+	return sol;
 }
