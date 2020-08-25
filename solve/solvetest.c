@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../common/grid.h"
-#include "solve.h"
+#include "../solve/solve.h"
 //#include "create.h"
 
 /*
@@ -63,7 +63,7 @@ int main(){
 	grid_set(grid, 8, 7, 6);
 	grid_set(grid, 8, 8, 1);
 
-	grid_print(grid, "output.txt");
+	grid_print(grid, stdout);
 
 	printf("..... testing solve_board .....");
 	if (solve_board(grid, 0))
@@ -76,7 +76,7 @@ int main(){
 		printf("Grid not solved");
 	}
 
-	grid_print(grid, "output.txt");
+	grid_print(grid, stdout);
 
 	printf("..... testing solver .....");
 
@@ -91,14 +91,14 @@ int main(){
 		printf("Not unique grid");
 	}
 
-	grid_print(grid, "output.txt");	
+	grid_print(grid, stdout);	
 
 	printf("..... testing check_unique .....");
 	int solutions = check_unique(grid, 0, 0, 0);
 
 	printf("This grid has %d solutions", solutions);
 
-	grid_print(grid, "output.txt");
+	grid_print(grid, stdout);
 	grid_delete(grid);
 
 }
