@@ -27,7 +27,7 @@ fuzzquery.o: fuzzquery.c
 
 .PHONY: test valgrind clean
 
-test: $(PROG) $(FUZZ)
+test: $(PROG)
 	bash testing.sh &> testing.out
 
 valgrind: $(PROG)
