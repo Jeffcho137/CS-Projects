@@ -13,6 +13,19 @@
 /**************** global types ****************/
 typedef int** grid_t;   // 2D array representing 9 rows of 9 integers
 
+/*
+ * SUGGESTION
+ */
+/*
+ * typedef struct grid{
+ * 	int** board;
+ * }grid_t*
+ *
+ *
+ */
+
+// WE WOULD BASICALLY CHANGE ALL GRID[ROW][COL] TO GRID->BOARD[ROW][COL]
+
 /**************** global functions ****************/
 /* that is, visible outside this file */
 /* see grid.h for comments about exported functions */
