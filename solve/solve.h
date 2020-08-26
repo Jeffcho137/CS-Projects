@@ -4,11 +4,13 @@
  * Team JST CS50 Summer 2020
  */ 
 
+#ifndef __SOLVE_H
+#define __SOLVE_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-//#include "grid.h"
-#include "../common/grid.h"
+#include "grid.h"
 
 /********** solve_board() **********/
 /*
@@ -50,3 +52,4 @@ int check_unique(grid_t *grid, int row, int col, int num);
 
 int solver(grid_t *grid);
 
+#endif  // __SOLVE_H
