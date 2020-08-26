@@ -199,8 +199,8 @@ valid_grid(grid_t grid)
                 found_num[k] = false;
             }
             // check each number in the grid
-            for (int row = 3 * i + 1; row < 3 * i + 4; row++) {
-                for (int col = 3 * j + 1; row < 3 * i + 4; row++) {
+            for (int row = 3 * i; row < 3 * (i + 1); row++) {
+                for (int col = 3 * j; row < 3 * (j + 1); row++) {
                     int num = grid[row][col];
                     if (num != 0) {
                         if (found_num[num]) {
