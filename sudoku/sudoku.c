@@ -22,7 +22,7 @@ int main(const int argc, char *argv[])
 {
   char* program = argv[0];  // program name
 
-  // check that there is 1 arguments
+  // check that there is 1 argument
   if (argc != 2) {
     fprintf(stderr, "usage: '%s create' or '%s solve'\n", program, program);
     return 1; 
@@ -43,8 +43,16 @@ int main(const int argc, char *argv[])
   }
 
   // get sudoku puzzle and solve it
-  if (strcmp(command, "create") == 0) {
+  if (strcmp(command, "solve") == 0) {
+    printf("Enter a sudoku puzzle to be solved:\n");
     grid_t grid = load_grid(stdin);
+
+    if (grid == NULL) {
+      fprintf(stderr, "Invalid sudoku puzzle.\n");
+      return 3;
+    }
+
+    printf("Solution:\n");
     solver(grid);
     grid_print(grid, stdout);
     grid_delete(grid);

@@ -155,8 +155,8 @@ valid_grid(grid_t grid)
     // check that each row is valid
     for (int i = 0; i < 9; i++) {
         // keep track of numbers that have been found
-        bool found_num[9];
-        for (int j = 0; j < 9; j++) {
+        bool found_num[10];
+        for (int j = 0; j < 10; j++) {
             found_num[j] = false;
         }
         // check each number in the row
@@ -174,8 +174,8 @@ valid_grid(grid_t grid)
     // check that each column is valid
     for (int i = 0; i < 9; i++) {
         // keep track of numbers that have been found
-        bool found_num[9];
-        for (int j = 0; j < 9; j++) {
+        bool found_num[10];
+        for (int j = 0; j < 10; j++) {
             found_num[j] = false;
         }
         // check each number in the column
@@ -194,13 +194,13 @@ valid_grid(grid_t grid)
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             // keep track of numbers that have been found
-            bool found_num[9];
-            for (int k = 0; k < 9; k++) {
+            bool found_num[10];
+            for (int k = 0; k < 10; k++) {
                 found_num[k] = false;
             }
             // check each number in the grid
-            for (int row = 3 * i + 1; row < 3 * i + 4; row++) {
-                for (int col = 3 * j + 1; row < 3 * i + 4; row++) {
+            for (int row = 3 * i; row < 3 * (i + 1); row++) {
+                for (int col = 3 * j; row < 3 * (j + 1); row++) {
                     int num = grid[row][col];
                     if (num != 0) {
                         if (found_num[num]) {
@@ -232,17 +232,17 @@ load_grid(FILE *fp)
   if (grid != NULL) {
     // read in each row
     for (int i = 0; i < 9; i++) {
-        if (fscanf(fp, "%d %d %d %d %d %d %d %d %d",
-            &grid[i][0], &grid[i][1], &grid[i][2],
-            &grid[i][3], &grid[i][4], &grid[i][5],
-            &grid[i][6], &grid[i][7], &grid[i][8])
-            != 9) {
-            return NULL; // the row has invalid syntax
-        }
+      if (fscanf(fp, "%d %d %d %d %d %d %d %d %d",
+          &grid[i][0], &grid[i][1], &grid[i][2],
+          &grid[i][3], &grid[i][4], &grid[i][5],
+          &grid[i][6], &grid[i][7], &grid[i][8])
+          != 9) {
+        return NULL; // the row has invalid syntax
+      }
     }
     // check that the sudoku grid is valid
     if (!valid_grid(grid)) {
-        return NULL;
+      return NULL;
     }
   }
 
