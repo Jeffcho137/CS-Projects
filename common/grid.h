@@ -13,7 +13,7 @@
 #include <stdbool.h>
 
 /**************** global types ****************/
-typedef struct grid grid_t;  // opaque to users of the module
+typedef int** grid_t;  // opaque to users of the module
 
 /**************** functions ****************/
 
