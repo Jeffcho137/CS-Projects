@@ -23,7 +23,7 @@
  *   NULL if error creating grid
  *   caller is responsible for freeing grid
  */   
-grid_t *create_puzzle(char *difficulty);
+grid_t *create_puzzle();
 
 
 #endif  // __CREATE_H
