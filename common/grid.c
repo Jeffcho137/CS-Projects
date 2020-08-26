@@ -91,7 +91,7 @@ grid_print(grid_t grid, FILE *fp)
         for (int j = 0; j < 8; j++) {
             fprintf(fp, "%d ", grid[i][j]);
         }
-        fprintf(fp, "%d\n", grid[i][9]);
+        fprintf(fp, "%d\n", grid[i][8]);
       }
     } else {
       fprintf(fp, "(null)");
