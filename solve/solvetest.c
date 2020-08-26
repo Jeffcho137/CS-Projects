@@ -29,7 +29,7 @@
 
 int main(){
 	
-	grid_t *grid = grid_new();
+	grid_t grid = grid_new();
 	grid_set(grid, 0, 3, 3);
 	grid_set(grid, 0, 4, 9);
 	grid_set(grid, 0, 7, 1);

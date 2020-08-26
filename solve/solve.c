@@ -17,7 +17,7 @@
  * checks if a number exists in a row
  */
 
-static bool check_row(grid_t *grid, int row, int col, int value)
+static bool check_row(grid_t grid, int row, int col, int value)
 {
 	for (int i = 0; i < 9; i++)
 	{
@@ -33,7 +33,7 @@ static bool check_row(grid_t *grid, int row, int col, int value)
 /*
  * checks if a number exists in a column
  */
-static bool check_col(grid_t *grid, int row, int col, int value)
+static bool check_col(grid_t grid, int row, int col, int value)
 {
 	for (int i = 0; i < 9; i ++)
 	{
@@ -52,7 +52,7 @@ static bool check_col(grid_t *grid, int row, int col, int value)
  * checks if a number exists in a smaller divided board (9 X 9) --> (3 X 3)
  */
 
-static bool check_board(grid_t *grid, int row, int col, int value)
+static bool check_board(grid_t grid, int row, int col, int value)
 {
 	int beg_row = (int)(row/3) * 3;
 	int beg_col = (int)(col/3) * 3;
@@ -77,7 +77,7 @@ static bool check_board(grid_t *grid, int row, int col, int value)
  * tries to see if a number already exists in a cell
  */
 
-static bool number_present(grid_t *grid, int row, int col, int value)
+static bool number_present(grid_t grid, int row, int col, int value)
 {
 	if (check_row(grid, row, col, value))
 		return true;
@@ -90,7 +90,7 @@ static bool number_present(grid_t *grid, int row, int col, int value)
 
 /********** check_unique() **********/
 /* see solve.h for more info */
-int check_unique(grid_t *grid, int row, int col, int num)
+int check_unique(grid_t grid, int row, int col, int num)
 {
 
 	if (col == 9)
@@ -121,7 +121,7 @@ int check_unique(grid_t *grid, int row, int col, int num)
 /*
  * finds the row given location on grid (0 - 80)
  */
-static int find_row(grid_t *grid, int loc)
+static int find_row(grid_t grid, int loc)
 {
 	return (int)(loc / 9);
 }
@@ -130,14 +130,14 @@ static int find_row(grid_t *grid, int loc)
 /*
  * finds the column given location on grid (0 - 80)
  */
-static int find_col(grid_t *grid, int loc)
+static int find_col(grid_t grid, int loc)
 {
 	return (int)(loc%9);
 }
 
 /********** solve_board() **********/
 /* see solve.h for more info */
-bool solve_board(grid_t *grid, int start_pos)
+bool solve_board(grid_t grid, int start_pos)
 {
 	int zero = 0;
 	for (int i = 0; i < 9; i++)
@@ -185,7 +185,7 @@ bool solve_board(grid_t *grid, int start_pos)
 
 /********** solver() **********/
 /* see solve.h for more info */
-int solver(grid_t *grid)
+int solver(grid_t grid)
 {
 	int sol = check_unique(grid, 0, 0, 0);
 	solve_board(grid, 0);

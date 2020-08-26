@@ -13,19 +13,6 @@
 /**************** global types ****************/
 typedef int** grid_t;   // 2D array representing 9 rows of 9 integers
 
-/*
- * SUGGESTION
- */
-/*
- * typedef struct grid{
- * 	int** board;
- * }grid_t*
- *
- *
- */
-
-// WE WOULD BASICALLY CHANGE ALL GRID[ROW][COL] TO GRID->BOARD[ROW][COL]
-
 /**************** global functions ****************/
 /* that is, visible outside this file */
 /* see grid.h for comments about exported functions */
@@ -35,17 +22,17 @@ typedef int** grid_t;   // 2D array representing 9 rows of 9 integers
 
 /**************** grid_new() ****************/
 /* see grid.h for description */
-grid_t *
+grid_t
 grid_new()
 {
-  grid_t* grid = malloc(9 * 9 * sizeof(int *));
+  grid_t grid = malloc(9 * sizeof(int *));
   if (grid == NULL) {
     return NULL;              // error allocating grid
   }
 
   // initialize the contents of each row
   for (int i = 0; i < 9; i++) {
-    grid[i] = malloc(9 * sizeof(int *));
+    grid[i] = malloc(9 * sizeof(int));
     if (grid[i] == NULL) {
         return NULL;          // error allocating grid
     }
@@ -62,21 +49,21 @@ grid_new()
 /**************** grid_get() ****************/
 /* see grid.h for description */
 int
-grid_get(grid_t* grid, int row, int col)
+grid_get(grid_t grid, int row, int col)
 {
   if (grid == NULL) { // bad grid
     return -1;
   } else if (row < 0 || col < 0 || row > 8 || col > 8) { // bad row/col
     return -1;
   } else {
-    return *grid[row][col];
+    return grid[row][col];
   }
 }
 
 /**************** grid_set() ****************/
 /* see grid.h for description */
 bool
-grid_set(grid_t* grid, int row, int col, int num)
+grid_set(grid_t grid, int row, int col, int num)
 {
   if (grid == NULL) { // bad grid
     return false;
@@ -85,7 +72,7 @@ grid_set(grid_t* grid, int row, int col, int num)
   } else if (num < 0 || num > 9) { // bad num
     return false;
   } else {
-    grid[row][col] = &num;
+    grid[row][col] = num;
     return true;
   }
 }
@@ -95,16 +82,16 @@ grid_set(grid_t* grid, int row, int col, int num)
 /**************** grid_print() ****************/
 /* see grid.h for description */
 void
-grid_print(grid_t* grid, FILE *fp)
+grid_print(grid_t grid, FILE *fp)
 {
   if (fp != NULL) {
     if (grid != NULL) {
       for (int i = 0; i < 9; i++) {
         // print this row
         for (int j = 0; j < 8; j++) {
-            fprintf(fp, "%d ", *grid[i][j]);
+            fprintf(fp, "%d ", grid[i][j]);
         }
-        fprintf(fp, "%d\n", *grid[i][9]);
+        fprintf(fp, "%d\n", grid[i][9]);
       }
     } else {
       fprintf(fp, "(null)");
@@ -115,7 +102,7 @@ grid_print(grid_t* grid, FILE *fp)
 /**************** grid_delete() ****************/
 /* see grid.h for description */
 void 
-grid_delete(grid_t* grid)
+grid_delete(grid_t grid)
 {
   if (grid != NULL) {
     for (int i = 0; i < 9; i++) {
@@ -128,7 +115,7 @@ grid_delete(grid_t* grid)
 /**************** valid_num() ****************/
 /* see grid.h for description */
 bool
-valid_num(grid_t* grid, int row, int col)
+valid_num(grid_t grid, int row, int col)
 {
   if (grid == NULL) { // bad grid
     return false;
@@ -136,21 +123,21 @@ valid_num(grid_t* grid, int row, int col)
     return false;
   }
 
-  int num = *grid[row][col];
+  int num = grid[row][col];
   for (int i = 0; i < 9; i++) {
     // check its row
-    if (i != col && *grid[row][i] == num) {
+    if (i != col && grid[row][i] == num) {
       return false;
     }
     // check its column
-    if (i != row && *grid[i][col] == num) {
+    if (i != row && grid[i][col] == num) {
       return false;
     }
   }
   // check its 3x3 square
   for (int i = row - (row % 3); i < i + 3; i++) {
     for (int j = col - (col % 3); j < j + 3; j++) {
-      if (!(i == row && j == col) && *grid[i][j] == num) {
+      if (!(i == row && j == col) && grid[i][j] == num) {
         return false;
       }
     }
@@ -162,7 +149,7 @@ valid_num(grid_t* grid, int row, int col)
 /**************** valid_grid() ****************/
 /* see grid.h for description */
 bool
-valid_grid(grid_t* grid)
+valid_grid(grid_t grid)
 {
   if (grid != NULL) {
     // check that each row is valid
@@ -174,7 +161,7 @@ valid_grid(grid_t* grid)
         }
         // check each number in the row
         for (int j = 0; j < 9; j++) {
-            int num = *grid[i][j];
+            int num = grid[i][j];
             if (num != 0) {
                 if (found_num[num]) {
                     return false;
@@ -193,7 +180,7 @@ valid_grid(grid_t* grid)
         }
         // check each number in the column
         for (int j = 0; j < 9; j++) {
-            int num = *grid[j][i];
+            int num = grid[j][i];
             if (num != 0) {
                 if (found_num[num]) {
                     return false;
@@ -214,7 +201,7 @@ valid_grid(grid_t* grid)
             // check each number in the grid
             for (int row = 3 * i + 1; row < 3 * i + 4; row++) {
                 for (int col = 3 * j + 1; row < 3 * i + 4; row++) {
-                    int num = *grid[row][col];
+                    int num = grid[row][col];
                     if (num != 0) {
                         if (found_num[num]) {
                             return false;
@@ -234,21 +221,21 @@ valid_grid(grid_t* grid)
 
 /**************** load_grid() ****************/
 /* see grid.h for description */
-grid_t *
+grid_t
 load_grid(FILE *fp)
 {
   if (fp == NULL) {
       return NULL;
   }
 
-  grid_t* grid = grid_new();
+  grid_t grid = grid_new();
   if (grid != NULL) {
     // read in each row
     for (int i = 0; i < 9; i++) {
         if (fscanf(fp, "%d %d %d %d %d %d %d %d %d",
-            grid[i][0], grid[i][1], grid[i][2],
-            grid[i][3], grid[i][4], grid[i][5],
-            grid[i][6], grid[i][7], grid[i][8])
+            &grid[i][0], &grid[i][1], &grid[i][2],
+            &grid[i][3], &grid[i][4], &grid[i][5],
+            &grid[i][6], &grid[i][7], &grid[i][8])
             != 9) {
             return NULL; // the row has invalid syntax
         }
