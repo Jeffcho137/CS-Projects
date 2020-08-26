@@ -24,7 +24,7 @@
  * 
  */
 
-static bool solve_board(grid_t *grid, int start_pos);
+bool solve_board(grid_t *grid, int start_pos);
 
 /********** check_unique() **********/
 /*

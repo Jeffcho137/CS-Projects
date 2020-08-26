@@ -137,7 +137,7 @@ static int find_col(grid_t *grid, int loc)
 
 /********** solve_board() **********/
 /* see solve.h for more info */
-static bool solve_board(grid_t *grid, int start_pos)
+bool solve_board(grid_t *grid, int start_pos)
 {
 	int zero = 0;
 	for (int i = 0; i < 9; i++)
