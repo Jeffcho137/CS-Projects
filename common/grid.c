@@ -135,8 +135,8 @@ valid_num(grid_t grid, int row, int col)
     }
   }
   // check its 3x3 square
-  for (int i = row - (row % 3); i < i + 3; i++) {
-    for (int j = col - (col % 3); j < j + 3; j++) {
+  for (int i = row - (row % 3); i < row - (row % 3) + 3; i++) {
+    for (int j = col - (col % 3); j < col - (col % 3) + 3; j++) {
       if (!(i == row && j == col) && grid[i][j] == num) {
         return false;
       }
