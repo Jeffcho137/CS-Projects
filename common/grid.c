@@ -25,14 +25,14 @@ typedef int** grid_t;   // 2D array representing 9 rows of 9 integers
 grid_t *
 grid_new()
 {
-  grid_t* grid = malloc(9 * sizeof(int *));
+  grid_t* grid = malloc(9 * 9 * sizeof(int *));
   if (grid == NULL) {
     return NULL;              // error allocating grid
   }
 
   // initialize the contents of each row
   for (int i = 0; i < 9; i++) {
-    grid[i] = malloc(9 * sizeof(int));
+    grid[i] = malloc(9 * sizeof(int *));
     if (grid[i] == NULL) {
         return NULL;          // error allocating grid
     }
@@ -215,7 +215,7 @@ valid_grid(grid_t* grid)
 
     return true;
   }
-  
+
   return false;
 }
 
