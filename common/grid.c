@@ -56,7 +56,7 @@ grid_get(grid_t* grid, int row, int col)
   } else if (row < 0 || col < 0 || row > 8 || col > 8) { // bad row/col
     return -1;
   } else {
-    return grid[row][col];
+    return *grid[row][col];
   }
 }
 
@@ -72,12 +72,9 @@ grid_set(grid_t* grid, int row, int col, int num)
   } else if (num < 0 || num > 9) { // bad num
     return false;
   } else {
-    grid[row][col] = num;
+    grid[row][col] = &num;
+    return true;
   }
-
-#ifdef MEMTEST
-  count_report(stdout, "After grid_set");
-#endif
 }
 
 
@@ -92,12 +89,12 @@ grid_print(grid_t* grid, FILE *fp)
       for (int i = 0; i < 9; i++) {
         // print this row
         for (int j = 0; j < 8; j++) {
-            fprintf(fp, "%d ", grid[i][j]);
+            fprintf(fp, "%d ", *grid[i][j]);
         }
-        fprintf(fp, "%d\n", grid[i][9]);
+        fprintf(fp, "%d\n", *grid[i][9]);
       }
     } else {
-      fputs("(null)", fp);
+      fprintf(fp, "(null)");
     }
   }
 }
@@ -113,10 +110,6 @@ grid_delete(grid_t* grid)
     }
     free(grid);
   }
-
-#ifdef MEMTEST
-  count_report(stdout, "End of grid_delete");
-#endif
 }
 
 /**************** valid_num() ****************/
@@ -130,21 +123,21 @@ valid_num(grid_t* grid, int row, int col)
     return false;
   }
 
-  int num = grid[row][col];
+  int num = *grid[row][col];
   for (int i = 0; i < 9; i++) {
     // check its row
-    if (i != col && grid[row][i] == num) {
+    if (i != col && *grid[row][i] == num) {
       return false;
     }
     // check its column
-    if (i != row && grid[i][col] == num) {
+    if (i != row && *grid[i][col] == num) {
       return false;
     }
   }
   // check its 3x3 square
   for (int i = row - (row % 3); i < i + 3; i++) {
     for (int j = col - (col % 3); j < j + 3; j++) {
-      if (!(i == row && j == col) && grid[i][j] == num) {
+      if (!(i == row && j == col) && *grid[i][j] == num) {
         return false;
       }
     }
@@ -168,7 +161,7 @@ valid_grid(grid_t* grid)
         }
         // check each number in the row
         for (int j = 0; j < 9; j++) {
-            int num = grid[i][j];
+            int num = *grid[i][j];
             if (num != 0) {
                 if (found_num[num]) {
                     return false;
@@ -187,7 +180,7 @@ valid_grid(grid_t* grid)
         }
         // check each number in the column
         for (int j = 0; j < 9; j++) {
-            int num = grid[j][i];
+            int num = *grid[j][i];
             if (num != 0) {
                 if (found_num[num]) {
                     return false;
@@ -208,7 +201,7 @@ valid_grid(grid_t* grid)
             // check each number in the grid
             for (int row = 3 * i + 1; row < 3 * i + 4; row++) {
                 for (int col = 3 * j + 1; row < 3 * i + 4; row++) {
-                    int num = grid[row][col];
+                    int num = *grid[row][col];
                     if (num != 0) {
                         if (found_num[num]) {
                             return false;
@@ -219,7 +212,11 @@ valid_grid(grid_t* grid)
             }
         }
     }
+
+    return true;
   }
+  
+  return false;
 }
 
 /**************** load_grid() ****************/
@@ -236,9 +233,9 @@ load_grid(FILE *fp)
     // read in each row
     for (int i = 0; i < 9; i++) {
         if (fscanf(fp, "%d %d %d %d %d %d %d %d %d",
-            &grid[i][0], &grid[i][1], &grid[i][2],
-            &grid[i][3], &grid[i][4], &grid[i][5],
-            &grid[i][6], &grid[i][7], &grid[i][8])
+            grid[i][0], grid[i][1], grid[i][2],
+            grid[i][3], grid[i][4], grid[i][5],
+            grid[i][6], grid[i][7], grid[i][8])
             != 9) {
             return NULL; // the row has invalid syntax
         }
