@@ -18,7 +18,7 @@ int main()
 {
  // create puzzle
  printf("creating new puzzle\n");
- grid_t *grid = create_puzzle();
+ grid_t grid = create_puzzle();
 
  // check whether the puzzle is valid
  bool valid = valid_grid(grid);

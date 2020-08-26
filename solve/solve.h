@@ -24,7 +24,7 @@
  * 
  */
 
-bool solve_board(grid_t *grid, int start_pos);
+bool solve_board(grid_t grid, int start_pos);
 
 /********** check_unique() **********/
 /*
@@ -38,7 +38,7 @@ bool solve_board(grid_t *grid, int start_pos);
  *
  */
 
-int check_unique(grid_t *grid, int row, int col, int num);
+int check_unique(grid_t grid, int row, int col, int num);
 
 /********** solver() **********/
 /*
@@ -50,6 +50,6 @@ int check_unique(grid_t *grid, int row, int col, int num);
  *
  */
 
-int solver(grid_t *grid);
+int solver(grid_t grid);
 
 #endif  // __SOLVE_H

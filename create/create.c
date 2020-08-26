@@ -12,15 +12,15 @@
 
 /**************** local functions ****************/
 static void array_shuffle(int nums[], int length);
-static void delete_numbers(grid_t *grid);
+static void delete_numbers(grid_t grid);
 
 /**************** create_puzzle() ****************/
 /* see create.h for more information */
-grid_t * 
+grid_t 
 create_puzzle()
 {
   // new grid to be returned
-  grid_t *grid = grid_new();
+  grid_t grid = grid_new();
   if (grid == NULL) {
     fprintf(stderr, "Error when creating new grid\n");
     return NULL;
@@ -48,7 +48,7 @@ create_puzzle()
       // check if grid has non-zero solutions, if zero solutions, then try another number
       while (check_unique(grid, 0, 0, 0) != 0) {
         grid_set(grid, i, x, nums[pos]);
-	pos++;
+	      pos++;
       } 
 
       // set number used to 0 so that it is not used again
@@ -82,7 +82,7 @@ array_shuffle(int nums[], int length)
 /**************** delete_numbers() ****************/
 /* deletes 45 numbers from grid */
 static void
-delete_numbers(grid_t *grid)
+delete_numbers(grid_t grid)
 {
   int deletions = 45;
 

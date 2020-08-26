@@ -27,7 +27,7 @@ typedef int** grid_t;  // opaque to users of the module
  * Caller is responsible for:
  *   later calling grid_delete.
  */
-grid_t* grid_new();
+grid_t grid_new();
 
 /**************** grid_get ****************/
 /* Return the number at the given row and column.
@@ -40,7 +40,7 @@ grid_t* grid_new();
  * Notes:
  *   the grid is unchanged by this operation.
  */
-int grid_get(grid_t* grid, int row, int col);
+int grid_get(grid_t grid, int row, int col);
 
 /**************** grid_set ****************/
 /* Sets the number at the given row and column to the given number.
@@ -53,7 +53,7 @@ int grid_get(grid_t* grid, int row, int col);
  *   false if num is not an integer from 0 to 9,
  *   true iff new number was set.  
  */
-bool grid_set(grid_t* grid, int row, int col, int num);
+bool grid_set(grid_t grid, int row, int col, int num);
 
 /**************** grid_print ****************/
 /* Print the whole table; provide the output file and func to print each item.
@@ -69,7 +69,7 @@ bool grid_set(grid_t* grid, int row, int col, int num);
  * Note:
  *   the grid and its contents are not changed by this function,
  */
-void grid_print(grid_t* grid, FILE *fp);
+void grid_print(grid_t grid, FILE *fp);
 
 /**************** grid_delete ****************/
 /* Delete grid.
@@ -80,7 +80,7 @@ void grid_print(grid_t* grid, FILE *fp);
  *   if grid==NULL, do nothing.
  *   otherwise, free the grid.
  */
-void grid_delete(grid_t* grid);
+void grid_delete(grid_t grid);
 
 /**************** valid_num ****************/
 /* Determines if a number in the grid is valid.
@@ -95,7 +95,7 @@ void grid_delete(grid_t* grid);
  *   true, if the number at the given row and column appears at most
  *   once in its row, column, and 3x3 square region.
  */
-bool valid_num(grid_t* grid, int row, int col);
+bool valid_num(grid_t grid, int row, int col);
 
 /**************** valid_grid ****************/
 /* Determines if a grid is a valid sudoku grid.
@@ -113,7 +113,7 @@ bool valid_num(grid_t* grid, int row, int col);
  *   true, if each number from 1 to 9 appears at most once in every
  *   row, column, and 3x3 square region.
  */
-bool valid_grid(grid_t* grid);
+bool valid_grid(grid_t grid);
 
 /**************** load_grid ****************/
 /* Loads a file and stores its contents in a new grid
@@ -133,6 +133,6 @@ bool valid_grid(grid_t* grid);
  * Caller is responsible for:
  *   later calling grid_delete.
  */
-grid_t* load_grid(FILE *fp);
+grid_t load_grid(FILE *fp);
 
 #endif // __GRID_H

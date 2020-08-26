@@ -37,14 +37,14 @@ int main(const int argc, char *argv[])
 
   // create sudoku puzzle
   if (strcmp(command, "create") == 0) {
-     grid_t* grid = create_puzzle();
+     grid_t grid = create_puzzle();
      grid_print(grid, stdout);
      grid_delete(grid);
   }
 
   // get sudoku puzzle and solve it
   if (strcmp(command, "create") == 0) {
-    grid_t* grid = load_grid(stdin);
+    grid_t grid = load_grid(stdin);
     solver(grid);
     grid_print(grid, stdout);
     grid_delete(grid);
