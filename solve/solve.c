@@ -22,7 +22,7 @@ static bool check_row(grid_t *grid, int row, int col, int value)
 	{
 		if (i == col)
 			continue;
-		if (grid_get(row, i) == value)
+		if (grid_get(grid, row, i) == value)
 			return true;
 	}
 	return false;
@@ -80,7 +80,7 @@ static bool number_present(grid_t *grid, int row, int col, int value)
 {
 	if (check_row(grid, row, col, value))
 		return true;
-	if (check_col(grid, row, col, vlaue))
+	if (check_col(grid, row, col, value))
 		return true;
 	if (check_board(grid, row, col, value))
 		return true;
