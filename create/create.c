@@ -7,8 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../common/grid.h"
-#include "../solve/solve.h"
+#include "create.h"
+#include "grid.h"
+#include "solve.h"
 
 /**************** local functions ****************/
 static void array_shuffle(int nums[], int length);
@@ -29,7 +30,6 @@ create_puzzle()
   srand(time(NULL));
 
   for (int i = 0; i < 9; i++) {
-    
     // reset numbers array for each row and shuffle to maintain randomness
     int nums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     array_shuffle(nums, 9);
@@ -38,21 +38,26 @@ create_puzzle()
     for (int x = 0; x < 9; x++) {
       // skip past 0s in nums array
       while (nums[pos] == 0) {
-        pos++;
+        pos = ((pos + 1) % 9);
       }
 
       // set number at the current row/col as the number at current pos of nums
       grid_set(grid, i, x, nums[pos]);
-      pos++;
+      pos = ((pos + 1) % 9);
 
       // check if grid has non-zero solutions, if zero solutions, then try another number
       while (check_unique(grid, 0, 0, 0) != 0) {
         grid_set(grid, i, x, nums[pos]);
-	      pos++;
+	      pos = ((pos + 1) % 9);
       } 
+     
+      // set number to zero so it is not used again
+      if (pos == 0) {
+        nums[8] = 0;
+      } else {
+        nums[pos - 1] = 0;
+      }
 
-      // set number used to 0 so that it is not used again
-      nums[pos - 1] = 0; 
     }
   }
 
