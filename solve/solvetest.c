@@ -65,38 +65,38 @@ int main(){
 
 	grid_print(grid, stdout);
 
-	printf("..... testing solve_board .....");
+	//printf("..... testing solve_board .....\n");
 	if (solve_board(grid, 0))
 	{
 		
-		printf("Grid solved");
+		printf("Grid solved\n");
  
 	}
 	else{
-		printf("Grid not solved");
+		printf("Grid not solved\n");
 	}
 
 	grid_print(grid, stdout);
 
-	printf("..... testing solver .....");
+	printf("..... testing solver .....\n");
 
 
 	if (solver(grid))
 	{
-		printf("Unique Grid");
+		printf("Unique Grid\n");
 
 	}
 
 	else{
-		printf("Not unique grid");
+		printf("Not unique grid\n");
 	}
 
 	grid_print(grid, stdout);	
 
-	printf("..... testing check_unique .....");
+	printf("..... testing check_unique .....\n");
 	int solutions = check_unique(grid, 0, 0, 0);
 
-	printf("This grid has %d solutions", solutions);
+	printf("This grid has %d solutions\n ", solutions);
 
 	grid_print(grid, stdout);
 	grid_delete(grid);

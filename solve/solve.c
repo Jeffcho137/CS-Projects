@@ -172,7 +172,8 @@ bool solve_board(grid_t grid, int start_pos)
 	{
 		grid_set(grid, row, col, ++value); 
 		//b->grid[row][col] = ++value;
-
+		
+		//if (value > 9)
 		if (value > 9)
 		{
 			grid_set(grid, row, col, 0);
