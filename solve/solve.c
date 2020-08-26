@@ -9,6 +9,7 @@
 #include <stdlib.h>
 //#include "grid.h"
 #include "../common/grid.h"
+#include "solve.h"
 //#include <time.h>
 
 /********** check_row **********/

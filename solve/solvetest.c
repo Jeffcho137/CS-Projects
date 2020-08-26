@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../common/grid.h"
-#include "../solve/solve.h"
+#include "solve.h"
 //#include "create.h"
 
 /*
