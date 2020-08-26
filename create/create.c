@@ -32,7 +32,7 @@ create_puzzle()
     
     // reset numbers array for each row and shuffle to maintain randomness
     int nums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    arrays_shuffle(nums, 9);
+    array_shuffle(nums, 9);
     int pos = 0;
     
     for (int x = 0; x < 9; x++) {
@@ -48,7 +48,7 @@ create_puzzle()
       // check if grid has non-zero solutions, if zero solutions, then try another number
       while (check_unique(grid, 0, 0, 0) != 0) {
         grid_set(grid, i, x, nums[pos]);
-	      pos++;
+	pos++;
       } 
 
       // set number used to 0 so that it is not used again
