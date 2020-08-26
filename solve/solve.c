@@ -165,6 +165,7 @@ bool solve_board(grid_t grid, int start_pos)
 	}
 
 	int value = 1;
+	grid_set(grid, row, col, value);
 	
 
 	while (number_present(grid, row, col, value) || !solve_board(grid, start_pos + 1))
