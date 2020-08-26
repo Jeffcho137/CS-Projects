@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "../common/grid.h"
+#include "grid.h"
 
 /**************** create_puzzle() ****************/
 /*
