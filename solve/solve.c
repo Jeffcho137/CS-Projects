@@ -35,7 +35,7 @@ static bool check_row(grid_t grid, int row, int col, int value)
  */
 static bool check_col(grid_t grid, int row, int col, int value)
 {
-	for (int i = 0; i < 9; i ++)
+	for (int i = 0; i < 9; i++)
 	{
 		if (i == row)
 			continue;
