@@ -89,8 +89,7 @@ create_puzzle()
        }
     } 
   }
-  grid_print(grid, stdout);
-  printf("\n");
+  
   delete_numbers(grid);
 
   return grid;
