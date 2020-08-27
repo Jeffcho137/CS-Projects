@@ -7,7 +7,7 @@ The `main` function first validates and parses parameters. If the parameter is `
 ### solve.c
 `solve.c` is implemented as follows.
 
-Solve is implemented by taking in a sudoku puzzle from input. It then procees by solving the sudoku grid by filling in empty cells and by backtracking when values are not able to be inserted. This process is recursive until the sudoku grid is fully solved. Then using `grid_print` the grid can be printed for the user using stdout. 
+Solve is implemented by taking in a sudoku grid from input. It then procees by solving the sudoku grid by filling in empty cells and by backtracking when values are not able to be inserted. This process is recursive until the sudoku grid is fully solved. Then using `grid_print` the grid can be printed for the user using stdout. 
 
 `Implementation`
 
