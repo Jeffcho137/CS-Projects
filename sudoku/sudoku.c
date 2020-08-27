@@ -52,9 +52,9 @@ int main(const int argc, char *argv[])
       return 3;
     }
 
-    printf("Your puzzle:\n");
+    printf("\nYour puzzle:\n");
     grid_print(grid, stdout);
-    printf("Solution:\n");
+    printf("\nSolution:\n");
     solver(grid);
     grid_print(grid, stdout);
     
