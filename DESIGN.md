@@ -22,7 +22,7 @@ We anticipate the following functions:
 
  1. *main*, which parses arguments and prints the puzzle to stdout
  2. *create_puzzle*, which creates a sudoku puzzle with a unique solution
- 3. *solve_puzzle*, which solves a given sudoku puzzle
+ 3. *solver & solve_board*, which solves a given sudoku puzzle
  4. *get_grid*, which prompts the user for input from stdin and stores the sudoku grid
  5. *valid_grid*, which checks if a grid is a valid sudoku puzzle
  6. *print_grid*, which prints a sudoku grid to stdout
@@ -42,7 +42,7 @@ The sudoku program will run as follows:
  1. *main* parses parameters, either calls *create_puzzle* or calls *get_grid* and *solve_puzzle*, and lastly calls *print_grid* to print the result
  2. *create_puzzle* creates a sudoku puzzle and returns it to *main*
  3. *get_grid* gets input from stdin, stores the sudoku_grid, calls *valid_grid* to check that it is valid, and returns the sudoku grid to *main*
- 4. *solve_puzzle* gets the sudoku grid created by *get_grid*, solves it, and returns the solved puzzle to *main*
+ 4. *solver & solve_board* gets the sudoku grid created by *get_grid*, solves it, and returns the solved puzzle to *main*
  5. *print_grid* gets the sudoku grid returned by *create_puzzle* or *solve_puzzle* and prints it to stdout
 
 ### Major data structures
