@@ -14,6 +14,7 @@
 /**************** local functions ****************/
 static void array_shuffle(int nums[], int length);
 static void delete_numbers(grid_t grid);
+static void fill_cells(grid_t grid, int row, int col);
 
 /**************** create_puzzle() ****************/
 /* see create.h for more information */
@@ -28,50 +29,64 @@ create_puzzle()
   }
 
   srand(time(NULL));
-  for (int i = 0; i < 9; i++) {
-    // reset numbers array for each row and shuffle to maintain randomness
-    int nums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    array_shuffle(nums, 9);
-    int pos = 0;
-    
-    for (int x = 0; x < 9; x++) {
-      printf("\n%d, %d start\n", i, x);
-      // skip past 0s in nums array
-      while (nums[pos] == 0) {
-        pos = ((pos + 1) % 9);
-      }
 
-      // set number at the current row/col as the number at current pos of nums
-      grid_set(grid, i, x, nums[pos]);
-      pos = ((pos + 1) % 9);
-     
-      // check if grid has non-zero solutions, if zero solutions, then try another number
-      grid_print(grid, stdout);
-      printf("\n%d, %d before unique\n", i, x);
-      while (check_unique(grid, 0, 0, 0) == 0) {
-	printf("\n%d, %d within unique\n", i, x);
-	// skip over zeros in array
-	while (nums[pos] == 0) {
+  // first fill in three matrices in left diagonal
+  for (int i = 0; i < 9; i+=3) {
+    
+    for (int row = i; row < i + 3; row++) {
+      // reset numbers array for each row and shuffle to maintain randomness
+      int nums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+      array_shuffle(nums, 9);
+      int pos = 0;
+
+      for (int col = i; col < i + 3; col++) {
+        // skip past 0s in nums array
+        while (nums[pos] == 0) {
           pos = ((pos + 1) % 9);
         }
 
-        grid_set(grid, i, x, nums[pos]);
-	pos = ((pos + 1) % 9);
-      }
+        // set number at the current row/col as the number at current pos of nums
+        grid_set(grid, row, col, nums[pos]);
+        pos = ((pos + 1) % 9);
      
-      // set number to zero so it is not used again
-      if (pos == 0) {
-        nums[8] = 0;
-      } else {
-        nums[pos - 1] = 0;
-      }
-      
-      printf("\n%d, %d last\n", i, x);
+        // check if grid has non-zero solutions, if zero solutions, then try another number
+        while (!valid_num(grid, row, col)) {
+	  // skip over zeros in array
+	  while (nums[pos] == 0) {
+            pos = ((pos + 1) % 9);
+          }
+
+          grid_set(grid, row, col, nums[pos]);
+	  pos = ((pos + 1) % 9);
+        }
+     
+        // set number to zero so it is not used again
+        if (pos == 0) {
+          nums[8] = 0;
+        } else {
+          nums[pos - 1] = 0;
+        } 
+      } 
     }
   }
+   
+
+  fill_cells(grid, 0, 3);
   
+
+	grid_print(grid, stdout);
+      printf("\n");
+	printf("\n");
+   
+ 
+
+  printf("\n\n\n");
   grid_print(grid, stdout);
+      printf("\n");
   delete_numbers(grid);
+
+  grid_print(grid, stdout);
+      printf("\n\n\n\n");
 
   return grid;
 }
@@ -120,4 +135,39 @@ delete_numbers(grid_t grid)
       }
     }
   }
+}
+
+
+
+static void 
+fill_cells(grid_t grid, int row, int col) {
+  if (row == 9) { 
+    return;
+  }
+
+  if (col == 9) {
+    row++;
+    col = 0;
+  }
+
+  if (grid_get(grid, row, col) !=0) {
+     fill_cells(grid, row, col + 1);
+  }
+
+  // try each number at the position
+  for (int i = 1; i <= 9; i++) {
+    grid_set(grid, row, col, i);
+    printf("row: %d col: %d num: %d\n", row, col, i);
+    // if valid, then break
+    if (valid_num(grid, row, col)) {
+      printf("row: %d col: %d num: %d broke\n", row, col, i);
+      break;
+    }
+  }
+
+
+grid_print(grid, stdout);
+      printf("\n");
+
+  fill_cells(grid, row, col + 1);
 }
