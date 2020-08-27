@@ -89,7 +89,7 @@ create_puzzle()
        }
     } 
   }
-  
+ 
   delete_numbers(grid);
 
   return grid;
@@ -140,5 +140,3 @@ delete_numbers(grid_t grid)
     }
   }
 }
-
-
