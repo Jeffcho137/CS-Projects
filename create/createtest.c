@@ -30,7 +30,7 @@ int main()
  }
 
  // check whether the puzzle has a unique solution
- if (check_unique(grid, 0, 0, 0) == 1) {  
+ if (check_unique(grid, 0, 0) == 1) {  
    printf("puzzle has a unique solution\n");
  } else {
    printf("puzzle does not have a unique solution\n");

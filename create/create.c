@@ -83,7 +83,7 @@ create_puzzle(int seed)
          grid_set(grid, row, col, i);
      
 	 // if valid, then break
-         if (valid_num(grid, row, col) && check_unique(grid, 0, 0, 0) != 0) {
+         if (valid_num(grid, row, col) && check_unique(grid, 0, 0) != 0) {
            break;
          }
        }
@@ -130,7 +130,7 @@ delete_numbers(grid_t grid)
       grid_set(grid, randomRow, randomCol, 0);
 
       // set the num at row and col to 0 if there is still a unique solution after doing so
-      if (check_unique(grid, 0, 0, 0) == 1) {
+      if (check_unique(grid, 0, 0) == 1) {
         deletions--;
      
       // else set the num back to the original num, but do not count it as a deletion

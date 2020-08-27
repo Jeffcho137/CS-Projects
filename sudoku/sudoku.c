@@ -37,7 +37,7 @@ int main(const int argc, char *argv[])
 
   // create sudoku puzzle
   if (strcmp(command, "create") == 0) {
-     grid_t grid = create_puzzle();
+     grid_t grid = create_puzzle(0);
      grid_print(grid, stdout);
      grid_delete(grid);
   }

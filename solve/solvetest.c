@@ -119,7 +119,7 @@ int main(){
 	// testing check_unique
 	printf("\n");
 	printf("..... testing check_unique .....\n");
-	int solutions = check_unique(grid, 0, 0, 0);
+	int solutions = check_unique(grid, 0, 0);
 
 	printf("This grid has %d solution(s) \n", solutions);
 
