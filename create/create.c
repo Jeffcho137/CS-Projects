@@ -19,7 +19,7 @@ static void delete_numbers(grid_t grid);
 /**************** create_puzzle() ****************/
 /* see create.h for more information */
 grid_t 
-create_puzzle()
+create_puzzle(int seed)
 {
   // new grid to be returned
   grid_t grid = grid_new();
@@ -28,7 +28,7 @@ create_puzzle()
     return NULL;
   }
 
-  srand(time(NULL));
+  srand(seed + time(NULL));
 
   // first fill in three matrices in left diagonal
   for (int i = 0; i < 9; i+=3) {

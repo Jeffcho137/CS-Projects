@@ -42,7 +42,7 @@ int main(const int argc, char *argv[])
   
   for (int i = 1; i <= n; i++) {
     // generate puzzle
-    grid_t grid = create_puzzle();
+    grid_t grid = create_puzzle(i);
     printf("creating puzzle %d\n", i);
     
     // check for valid puzzle
