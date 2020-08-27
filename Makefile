@@ -8,7 +8,7 @@ all:
 	make -C common
 	make -C solve
 	make -C create
-	make -C sudoku
+	make -C sudoku all
 
 ############## test sudoku ##########
 test: all

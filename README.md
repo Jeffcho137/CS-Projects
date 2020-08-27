@@ -43,7 +43,7 @@ See IMPLEMENTATION.md
 
 ### Compilation
 
-To compile, simply `make sudoku.o`.
+To compile everything, simply run `make` in the top-level directory. To run the testing shell script, run `make test`.
 
 ### Exit
 
