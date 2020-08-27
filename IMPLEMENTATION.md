@@ -38,9 +38,9 @@ Solve is implemented by taking in a sudoku grid from input. It then procees by s
 ### create.c
 `create.c` is implemented as follows.
 
-`create_puzzle` takes no parameters and returns a valid sudoku puzzle with a unique solution. The puzzle is returned with 45 numbers removed. 
+`create_puzzle` take int seed as a parameter and returns a valid sudoku puzzle with a unique solution. The puzzle is returned with 45 numbers removed. 
 
-1. A grid is first created with grid_new() and srand is called with time(NULL) to seed random with the current time. 
+1. A grid is first created with grid_new() and srand is called with time(NULL) and int seed to seed random. 
 2. The function then has a for loop which fills in the three matrices in the left diagonal. For each row within each matrix, an array is filled with the numbers 1-9 and the array is shuffled with `array_shuffle`. The value at each column is then set with a number from the array. If the number is not valid, then numbers are continuously tried until one is valid. 
 3. After filling in the diagonal, each row and column is iterated through. If there is already a number at the position, then the loop continues. Otherwise each number from 1-9 is tried at the position until the number is valid and allows for one or more solutions. 
 4. After the grid is filled, 45 numbers are deleted with `delete_numbers`, which loops through random row/column pairs and sets the number at the row/column to zero if there is still a unique solution after the deletion. 
@@ -48,7 +48,7 @@ Solve is implemented by taking in a sudoku grid from input. It then procees by s
 
 ### create.c functions
 ```c
-grid_t create_puzzle();
+grid_t create_puzzle(int seed);
 static void array_shuffle(int nums[], int length);
 static void delete_numbers(grid_t grid);
 ```
