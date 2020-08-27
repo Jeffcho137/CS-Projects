@@ -14,7 +14,7 @@
 /**************** local functions ****************/
 static void array_shuffle(int nums[], int length);
 static void delete_numbers(grid_t grid);
-static void fill_cells(grid_t grid, int row, int col);
+
 
 /**************** create_puzzle() ****************/
 /* see create.h for more information */
@@ -70,23 +70,28 @@ create_puzzle()
     }
   }
    
+  // after filling in diagonal, fill in remaining cells
+  for (int row = 0; row < 9; row++) {
+    for (int col = 0; col < 9; col++) {
+       // continue if already number at the position
+       if (grid_get(grid, row, col) != 0) { 
+         continue;
+       }
 
-  fill_cells(grid, 0, 3);
-  
-
-	grid_print(grid, stdout);
-      printf("\n");
-	printf("\n");
-   
- 
-
-  printf("\n\n\n");
+       // try each number at the position
+       for (int i = 1; i <= 9; i++) {
+         grid_set(grid, row, col, i);
+     
+	 // if valid, then break
+         if (valid_num(grid, row, col) && check_unique(grid, 0, 0, 0) != 0) {
+           break;
+         }
+       }
+    } 
+  }
   grid_print(grid, stdout);
-      printf("\n");
+  printf("\n");
   delete_numbers(grid);
-
-  grid_print(grid, stdout);
-      printf("\n\n\n\n");
 
   return grid;
 }
@@ -126,7 +131,7 @@ delete_numbers(grid_t grid)
       grid_set(grid, randomRow, randomCol, 0);
 
       // set the num at row and col to 0 if there is still a unique solution after doing so
-      if (check_unique(grid, 0, 0, 0) == 0) {
+      if (check_unique(grid, 0, 0, 0) == 1) {
         deletions--;
      
       // else set the num back to the original num, but do not count it as a deletion
@@ -138,36 +143,3 @@ delete_numbers(grid_t grid)
 }
 
 
-
-static void 
-fill_cells(grid_t grid, int row, int col) {
-  if (row == 9) { 
-    return;
-  }
-
-  if (col == 9) {
-    row++;
-    col = 0;
-  }
-
-  if (grid_get(grid, row, col) !=0) {
-     fill_cells(grid, row, col + 1);
-  }
-
-  // try each number at the position
-  for (int i = 1; i <= 9; i++) {
-    grid_set(grid, row, col, i);
-    printf("row: %d col: %d num: %d\n", row, col, i);
-    // if valid, then break
-    if (valid_num(grid, row, col)) {
-      printf("row: %d col: %d num: %d broke\n", row, col, i);
-      break;
-    }
-  }
-
-
-grid_print(grid, stdout);
-      printf("\n");
-
-  fill_cells(grid, row, col + 1);
-}
