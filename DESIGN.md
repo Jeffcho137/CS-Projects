@@ -57,7 +57,7 @@ The following helper modules provide data structures:
 
 2. Unit testing for the solver
 
-3. Fuzzy testing for the sudoku program
+3. Fuzz testing for the sudoku program
 * use the creator to generate n puzzles, where n is a commandline argument
 * for each puzzle
     * check that the puzzle has a unique solution
