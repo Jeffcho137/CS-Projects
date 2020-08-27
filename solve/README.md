@@ -22,7 +22,7 @@ The solve module is defined in `solve.h` and implemented in `solve.c`.
 * `Makefile` - compilation procedure
 * `solve.h` - the interface
 * `solve.c` - the implentation
-* `createtest.c` - test program
+* `solvetest.c` - test program
 
 ### Compilation
 `make`
