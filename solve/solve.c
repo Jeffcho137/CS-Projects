@@ -94,7 +94,8 @@ static bool number_present(grid_t grid, int row, int col, int value)
     return true;
   if (check_board(grid, row, col, value))
     return true;
-    return false;
+    
+  return false;
 }
 
 /********** check_unique() **********/
