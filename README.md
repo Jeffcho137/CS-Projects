@@ -31,7 +31,7 @@ See IMPLEMENTATION.md
 
 ### Assumptions
 
-* TODO
+If multiple sudoku puzzles are made within the same program, then a different int seed is passed to create_puzzle each time.
 
 ### Files
 
