@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "create.h"
 #include "grid.h"
 #include "solve.h"
@@ -16,6 +17,8 @@
 /* **************************************** */
 int main() 
 {
+ srand(time(NULL));
+ 
  // create puzzle
  printf("creating new puzzle\n");
  grid_t grid = create_puzzle();
@@ -30,23 +33,21 @@ int main()
  }
 
  // check whether the puzzle has a unique solution
- int unique = check_unique(grid, 0, 0, 0);
- 
- if (unique == 0) {  
+ if (check_unique(grid, 0, 0, 0) == 1) {  
    printf("puzzle has a unique solution\n");
  } else {
    printf("puzzle does not have a unique solution\n");
  }
 
  // print the puzzle
- printf("\nprinting the puzzle\n\n");
+ printf("printing the puzzle\n\n");
  grid_print(grid, stdout);
 
 
  
  
  // repeat with another puzzle
- printf("repeating process with another puzzle\n");
+ printf("\nrepeating process with another puzzle\n\n");
  grid_delete(grid);
 
  // create puzzle
@@ -63,15 +64,15 @@ int main()
  }
 
  // check whether the puzzle has a unique solution
- unique = check_unique(grid, 0, 0, 0);
-
- if (unique == 0) {
+ if (check_unique(grid, 0, 0, 0) == 1) {
    printf("puzzle has a unique solution\n");
  } else {
    printf("puzzle does not have a unique solution\n");
  }
 
  // print the puzzle
- printf("\nprinting the puzzle\n\n");
+ printf("printing the puzzle\n\n");
  grid_print(grid, stdout);
+
+ grid_delete(grid);
 }
