@@ -96,7 +96,7 @@ int main(){
 	printf("..... testing check_unique .....\n");
 	int solutions = check_unique(grid, 0, 0, 0);
 
-	printf("This grid has %d solutions\n ", solutions);
+	printf("This grid has %d solutions \n", solutions);
 
 	grid_print(grid, stdout);
 	grid_delete(grid);
