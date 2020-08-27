@@ -54,7 +54,7 @@ int main(const int argc, char *argv[])
     }
 
     // check for unique solution
-    if (check_unique(grid, 0, 0, 0) == 1) {
+    if (check_unique(grid, 0, 0) == 1) {
       printf("puzzle %d has a unique solution\n", i);
     } else {
       printf("puzzle %d does not have a unique solution\n", i);
