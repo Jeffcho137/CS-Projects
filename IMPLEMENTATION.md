@@ -29,7 +29,7 @@ Solve is implemented by taking in a sudoku grid from input. It then procees by s
 * `static bool check_col(grid_t grid, int row, int col, int value)`
 * `static bool check_board(grid_t grid, int row, int col, int value)`
 * `static bool number_present(grid_t grid, int row, int col, int value)`
-* `int check_unique(grid_t grid, int row, int col, int num)`
+* `int check_unique(grid_t grid, int row, int col)`
 * `static int find_row(grid_t grid, int loc)`
 * `static int find_col(grid_t grid, int loc)` 
 * `bool solve_board(grid_t grid, int start_pos)`
@@ -37,8 +37,21 @@ Solve is implemented by taking in a sudoku grid from input. It then procees by s
 
 ### create.c
 `create.c` is implemented as follows.
-TODO
 
+`create_puzzle` takes no parameters and returns a valid sudoku puzzle with a unique solution. The puzzle is returned with 45 numbers removed. 
+
+1. A grid is first created with grid_new() and srand is called with time(NULL) to seed random with the current time. 
+2. The function then has a for loop which fills in the three matrices in the left diagonal. For each row within each matrix, an array is filled with the numbers 1-9 and the array is shuffled with `array_shuffle`. The value at each column is then set with a number from the array. If the number is not valid, then numbers are continuously tried until one is valid. 
+3. After filling in the diagonal, each row and column is iterated through. If there is already a number at the position, then the loop continues. Otherwise each number from 1-9 is tried at the position until the number is valid and allows for one or more solutions. 
+4. After the grid is filled, 45 numbers are deleted with `delete_numbers`, which loops through random row/column pairs and sets the number at the row/column to zero if there is still a unique solution after the deletion. 
+5. After 45 numbers are deleted, the grid is returned.
+
+### create.c functions
+```c
+grid_t create_puzzle();
+static void array_shuffle(int nums[], int length);
+static void delete_numbers(grid_t grid);
+```
 
 ## Modules used
 `sudoku.c`, `solve.c`, and `create.c` all use the `grid` module, which is implemented in `common/grid.c`.
