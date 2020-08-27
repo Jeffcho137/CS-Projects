@@ -15,20 +15,23 @@
 
 
 # unit test for solve.c
-printf "testing solver\n"
+printf "unit test for solver\n"
 ../solve/solvetest
 
 # unit test for create.c
-printf "\ntesting creator\n"
+printf "\nunit test for creator\n"
 ../create/createtest
 
 # fuzz testing
+printf "\nfuzz testing\n"
 ./fuzztesting 10
 
 # test sudoku create
+printf "\ntesting sudoku create\n"
 ./sudoku create
 
 # test sudoku solve
+printf "\ntesting sudoku solve\n"
 echo "0 0 0 2 6 0 7 0 1" > testpuzzle
 echo "6 8 0 0 7 0 0 9 0" >> testpuzzle
 echo "1 9 0 0 0 4 5 0 0" >> testpuzzle
