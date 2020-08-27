@@ -30,6 +30,15 @@ printf "\nfuzz testing\n"
 printf "\ntesting sudoku create\n"
 ./sudoku create
 
+# creating graphics file
+printf "\ncreating input graphics file\n"
+./sudoku create > input.txt
+cat input.txt | ./sudoku solve > output.txt
+cd ..
+mv sudoku/input.txt graphics/input.txt
+mv sudoku/output.txt graphics/output.txt
+cd sudoku
+
 # test sudoku solve
 printf "\ntesting sudoku solve\n"
 echo "0 0 0 2 6 0 7 0 1" > testpuzzle
