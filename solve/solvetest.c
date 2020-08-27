@@ -27,8 +27,24 @@
  * https://www.sudokukingdom.com/rules.php
  */
 
+/*
+ * test grid: (unique solution) & soluions
+ *
+ * 2 4 8 3 9 5 7 1 6
+ * 5 7 1 6 2 8 3 4 9 
+ * 9 3 6 7 4 1 5 8 2 
+ * 6 8 2 5 3 9 1 7 4 
+ * 3 5 9 1 7 4 6 2 8 
+ * 7 1 4 8 6 2 9 5 3 
+ * 8 6 3 4 1 7 2 9 5 
+ * 1 9 5 2 8 6 4 3 7 
+ * 4 2 7 9 5 3 8 6 1 
+ *
+ */
+
 int main(){
 	
+	// defining the test grid
 	grid_t grid = grid_new();
 	grid_set(grid, 0, 3, 3);
 	grid_set(grid, 0, 4, 9);
@@ -63,9 +79,12 @@ int main(){
 	grid_set(grid, 8, 7, 6);
 	grid_set(grid, 8, 8, 1);
 
+	// print the grid
 	grid_print(grid, stdout);
 
-	//printf("..... testing solve_board .....\n");
+	// testing solve_board
+	printf("\n");
+	printf("..... testing solve_board .....\n");
 	if (solve_board(grid, 0))
 	{
 		
@@ -76,8 +95,11 @@ int main(){
 		printf("Grid not solved\n");
 	}
 
+	// print the resulting grid
 	grid_print(grid, stdout);
 
+	// testing solver
+	printf("\n");
 	printf("..... testing solver .....\n");
 
 
@@ -91,14 +113,20 @@ int main(){
 		printf("Not unique grid\n");
 	}
 
+	// printing the resulting grid
 	grid_print(grid, stdout);	
 
+	// testing check_unique
+	printf("\n");
 	printf("..... testing check_unique .....\n");
 	int solutions = check_unique(grid, 0, 0, 0);
 
-	printf("This grid has %d solutions \n", solutions);
+	printf("This grid has %d solution(s) \n", solutions);
 
+	// print the resulting grid
 	grid_print(grid, stdout);
+
+	// delete the grid
 	grid_delete(grid);
 
 }
