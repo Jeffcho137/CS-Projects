@@ -1,12 +1,3 @@
-# Testing for the sudoku program
-
-Unit tests for the creator and the solver are provided in `create/createtest.c` and `solve/solvetest.c`. The unit test for the creator creates 2 sudoku puzzles, checks if they're valid, and checks if they have unique solutions. The unit test for the solver tests the local functions used by the solver and tests the solver on a manually generated sudoku puzzle.
-
-Fuzz testing is provided in `sudoku/fuzztesting.c`. The fuzz test takes a number `n` as a command-line argument, generates `n` puzzles, and checks if each puzzle is valid and has a unique solution.
-
-The `sudoku/testing.sh` program performs the unit tests and the fuzz test, and it also tests the`sudoku.c` program. Testing using `make test` will produce testing output in `testing.out`. The output of `testing.sh` is shown below:
-
-```
 unit test for solver
 0 0 0 3 9 0 0 1 0
 5 0 1 0 0 0 0 4 0
@@ -243,4 +234,3 @@ Solution:
 5 1 9 3 2 6 8 7 4
 2 4 8 9 5 7 1 3 6
 7 6 3 4 1 8 2 5 9
-```

@@ -11,21 +11,23 @@ LIBS =
 
 CFLAGS = -Wall -pedantic -std=c11 -ggdb $(TESTING) -I../common -I../create -I../solve
 CC = gcc
-MAKE = make
+MAKE = make all
 
 $(PROG): $(OBJS)
 	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
 
-$(FUZZ): $(FUZZOBJS) $(LLIBS)
+$(FUZZ): $(FUZZOBJS) $(LIBS)
 	$(CC) $(CFLAGS) $^ -o $@
 	
 sudoku.o: ../create/create.h ../solve/solve.h ../common/grid.h
 create.o: ../create/create.h
 solve.o:  ../solve/solve.h
 grid.o: ../common/grid.h
-fuzzquery.o: fuzzquery.c
+fuzztesting.o: fuzztesting.c
 
-.PHONY: test valgrind clean
+.PHONY: all test valgrind clean
+
+all: $(PROG) $(FUZZ)
 
 test: $(PROG)
 	bash testing.sh &> testing.out
