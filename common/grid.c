@@ -237,11 +237,13 @@ load_grid(FILE *fp)
           &grid[i][3], &grid[i][4], &grid[i][5],
           &grid[i][6], &grid[i][7], &grid[i][8])
           != 9) {
+        grid_delete(grid);
         return NULL; // the row has invalid syntax
       }
     }
     // check that the sudoku grid is valid
     if (!valid_grid(grid)) {
+      grid_delete(grid);
       return NULL;
     }
   }
