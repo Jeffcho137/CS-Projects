@@ -24,3 +24,6 @@ The create module is defined in `create.h` and implemented in `create.c`. `creat
 
 ### Assumptions
 If multiple sudoku puzzles are made within the same program, then a different int seed is passed to create_puzzle each time.
+
+### Sources
+https://www.101computing.net/sudoku-generator-algorithm/ - used as inspiration for delete_numbers, but I took a slightly different appraoch 
