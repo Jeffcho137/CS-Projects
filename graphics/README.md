@@ -26,6 +26,6 @@ Graphics takes in a file as input and animates it using the provided cs1lib.py f
 
 # Functions
 
-* `draw_grid(file)
+* `draw_grid(file)`
 * `main()`
 * `start_graphics(main, width, height, title)`
